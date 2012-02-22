@@ -1,13 +1,10 @@
 //
 //  IOSMQ.h
-//  Flyessence
 //
 //  Created by Per-Olov Jernberg on 2012-02-22.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
 
 @interface IOSMQMessage : NSObject
 
@@ -27,7 +24,6 @@
 - (void) queue:(IOSMQ *)queue message:(IOSMQMessage*)message;
 
 @end
-
 
 @interface IOSMQ : NSObject<UIWebViewDelegate> {
     NSTimer *timer;

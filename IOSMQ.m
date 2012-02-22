@@ -1,9 +1,7 @@
 //
 //  IOSMQ.m
-//  Flyessence
 //
 //  Created by Per-Olov Jernberg on 2012-02-22.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "IOSMQ.h"
@@ -67,14 +65,10 @@
     return [mq autorelease];
 }
 
-+ (NSString *) generateID {
-    return @"";
-}
-
 - (void) send:(IOSMQMessage *)message {
     // TODO: Use SBJsonWriter instead
     NSString *js = [NSString stringWithFormat:@"IOSMQ._backendPush({id:'%@',message:'%@'})",message.id,message.message];
-    NSLog(@"pushing json: %@",js);
+    // NSLog(@"pushing json: %@",js);
     [self.webview stringByEvaluatingJavaScriptFromString:js];
 } 
 
@@ -102,8 +96,7 @@
 }
 
 - (void) start {
-    NSLog(@"IOSMQ: start" );
-    // hook events
+    // NSLog(@"IOSMQ: start" );
     [self.webview setDelegate:self];
     self->timer = [NSTimer scheduledTimerWithTimeInterval:self.pollInterval target:self selector:@selector(_poll) userInfo:nil repeats:YES];
 }
@@ -116,14 +109,14 @@
 
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"IOSMQ: did fail; %@", error);
+    // NSLog(@"IOSMQ: did fail; %@", error);
     if( nextDelegate != nil )
         [nextDelegate webView:webView didFailLoadWithError:error];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    NSLog(@"IOSMQ: did start load");
+    // NSLog(@"IOSMQ: did start load");
     
     if( nextDelegate != nil )
         [nextDelegate webViewDidStartLoad:webView];
@@ -131,7 +124,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"IOSMQ: did finish loading");
+    // NSLog(@"IOSMQ: did finish loading");
     
     NSString *filepath = [[NSBundle mainBundle] pathForResource:@"IOSMQ" ofType:@"js"];
     if( filepath != nil ){
@@ -148,7 +141,7 @@
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSString* urlString = [[request URL] absoluteString];
-    NSLog(@"IOSMQ: request: %@", urlString);
+    // NSLog(@"IOSMQ: request: %@", urlString);
 
     if( nextDelegate != nil )
         return [nextDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];

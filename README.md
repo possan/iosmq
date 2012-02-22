@@ -35,6 +35,12 @@ Send messages to the html app
 [mq send:[IOSMQMessage messageWithMessage:@"message from app"]];
 ````
 
+If you have another UIWebViewDelegate you want to use you can chain it after ourone.
+
+```Objective-C
+mq.nextDelegate = mydelegate;
+```
+
 In JavaScript land:
 -------------------
 
@@ -52,7 +58,7 @@ IOSMQ.listen(function(message,id){
 Query for data in the native app:
 
 ```JavaScript
-IOSMQ.get( 'purchase-status/'+id, function( answer ) {
+IOSMQ.get( 'purchase-status/123', function( answer ) {
 	alert(answer);
 } );
 ```
